@@ -24,8 +24,9 @@ inline Table *new_Table() {
 }
 
 
-inline bool change_size_Table(Table *table, size_t new_size) {
+inline bool safe_change_size_Table(Table *table, size_t new_size) {
     if (table != NULL) {
+        if (table->length > new_size) return false;
         Record *tmp = (Record*)malloc(sizeof(Record) * new_size);
         if (tmp != NULL) {
             if (table->length != 0) {
@@ -43,6 +44,39 @@ inline bool change_size_Table(Table *table, size_t new_size) {
             }
         }
         else return false;
+    }
+    else return false;
+}
+
+
+// You can lost data if use this :
+inline bool unsafe_change_size_Table(Table *table, size_t new_size) {
+    if (table != NULL) {
+        Record *tmp = (Record*)malloc(sizeof(Record) * new_size);
+        if (tmp == NULL) return false;
+        if (table->data == NULL) { 
+            table->data = tmp;
+            table->length = new_size;
+            table->top = 0;
+            return true;
+        }
+        else {
+            if (table->length > new_size) 
+                for (int i = 0; i < (int)new_size; i++)
+                    tmp[i] = table->data[i];
+            
+            else if (table->length < new_size) 
+                for (int i = 0; i < (int)table->length; i++)
+                    tmp[i] = table->data[i];
+
+            else if (table->length == new_size) 
+                for (int i = 0; i < (int)new_size; i++)
+                    tmp[i] = table->data[i];
+
+            free(table->data);
+            table->data = tmp;
+            return true;
+        }
     }
     else return false;
 }

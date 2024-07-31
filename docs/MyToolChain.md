@@ -1,6 +1,6 @@
 # My Tool chain :
 
-I use msys2 provided :
+I use [msys2](https://www.msys2.org/) provided :
 
 ### Clang :
     - clang version 18.1.8
@@ -10,3 +10,5 @@ I use msys2 provided :
 ### Ninja :
     - version : 1.12.1
 
+### Cmake :
+    - version : 3.30.1
