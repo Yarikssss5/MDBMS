@@ -1,2 +1,2 @@
 # MDBMS
-Small Migration Data Base Manage System writed on c
+## Small Migration Data Base Manage System writed on C
