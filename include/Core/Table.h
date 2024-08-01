@@ -82,4 +82,20 @@ inline bool unsafe_change_size_Table(Table *table, size_t new_size) {
 }
 
 
+inline bool rename_Table(Table *table, MyString *new_name) {
+    if (table != NULL && new_name != NULL) {
+        if (table->name.length == 0) {
+            table->name = *new_name;
+            return true;
+        } 
+        else {
+            remove_MyString(&table->name);
+            table->name = *new_name;
+            return true;
+        }
+    }
+    else return false;
+}
+
+
 #endif
