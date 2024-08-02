@@ -18,13 +18,13 @@ typedef union {
 
 
 typedef enum {
-    INT,
-    CHAR,
-    MYSTRING,
-    DOUBLE,
-    BOOL,
-    FLOAT,
-    UNSIGNED_LONG,
+    INT = 1,
+    CHAR = 2,
+    MYSTRING = 3,
+    DOUBLE = 4,
+    BOOL = 5,
+    FLOAT = 6,
+    UNSIGNED_LONG = 7,
 } Type;
 
 

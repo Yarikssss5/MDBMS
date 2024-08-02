@@ -60,5 +60,33 @@ inline bool safe_change_size_MyString(MyString *str, size_t new_size) {
 }
 
 
+inline int write_MyString(FILE *file, MyString *str) {
+    if (file != NULL && str != NULL) {
+        fputc((int)str->top, file);
+        fputc((int)str->length, file);
+        for (int i = 0; i < (int)str->length; i++)
+            fputc((int)str->data[i], file);
+        return 0;
+    }
+    else return 1;
+}
+
+
+inline int read_MyString(FILE *file, MyString *str) {
+    if (file != NULL && str != NULL) {
+        str->top = fgetc(file);
+        str->length = fgetc(file);
+        if (str->data != NULL) free(str->data);
+        str->data = (char*)malloc(sizeof(char) * str->length);
+        if (str->data != NULL) {
+            for (int i = 0; i < (int)str->length; i++)
+                str->data[i] = (char)fgetc(file);
+            return 0;
+        }
+        else return 1;
+    }
+    else return 1;
+}
+
 
 #endif
