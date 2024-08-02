@@ -10,6 +10,10 @@ typedef struct {
 } Field;
 
 
+inline size_t get_size_Field(Field *field) {
+    return (size_t)( sizeof(Any) + sizeof(Type) /**/ );
+}
+
 inline Field *new_Field() {
     Field *tmp = (Field*)malloc(sizeof(Field));
     if ( tmp != NULL ) tmp->name = *empty_MyString();

@@ -98,4 +98,32 @@ inline bool rename_Table(Table *table, MyString *new_name) {
 }
 
 
+inline int write_Table(FILE *file, Table *table) {
+    if (file != NULL && table != NULL) {
+        write_MyString(file, &table->name);
+        fputc(table->top, file);
+        fputc(table->length, file);
+        for (int i = 0; i < (int)table->length; i++)
+            write_Record(file, &table->data[i]);
+        return 0;
+    }
+    else return 1;
+}
+
+
+inline int read_Table(FILE *file, Table *table) {
+    if (file != NULL && table != NULL) {
+        if (table->name.data != NULL) 
+            remove_MyString(&table->name);
+        read_MyString(file, &table->name);
+        table->top = fgetc(file);
+        table->length = fgetc(file);
+        for (int i = 0; i < (int)table->length; i++)
+            read_Record(file, &table->data[i]);
+        return 0;
+    }
+    else return 1;
+}
+
+
 #endif

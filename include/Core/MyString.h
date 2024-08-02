@@ -14,6 +14,13 @@ typedef struct {
 } MyString;
 
 
+inline size_t get_size_MyString(MyString *str) {
+    if (str != NULL) 
+        return (size_t)( sizeof(MyString) + ( sizeof(char) * str->length ) );
+    else return 0;
+}
+
+
 inline MyString *empty_MyString() {
     MyString *tmp = (MyString*)malloc(sizeof(MyString));
     if (tmp != NULL) { 

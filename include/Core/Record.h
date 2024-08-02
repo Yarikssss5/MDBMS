@@ -85,4 +85,39 @@ inline bool unsafe_change_size_Record(Record *record, size_t new_size) {
 }
 
 
+inline int write_Record(FILE *file, Record *record) {
+    if (file != NULL && record != NULL) {
+        if (record->data != NULL) {
+            fputc(record->id, file);
+            fputc(record->top, file);
+            fputc(record->length, file);
+            for (int i = 0; i < (int)record->length; i++) {
+                write_Field(file, &record->data[i]);
+            }
+            return 0;
+        }
+        else return 1;
+    }
+    else return 1;
+}
+
+
+inline int read_Record(FILE *file, Record *record) {
+    if (file != NULL && record != NULL) {
+        record->id = fgetc(file);
+        record->top = fgetc(file);
+        record->length = fgetc(file);
+        if (record->data != NULL) free(record->data);
+        record->data = (Field*)malloc(sizeof(Field) * record->length);
+        if (record->data != NULL) {
+            for (int i = 0; i < (int)record->length; i++)
+                read_Field(file, &record->data[i]);
+            return 0;
+        }
+        else return 1;
+    }
+    else return 1;
+}
+
+
 #endif
