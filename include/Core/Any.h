@@ -6,6 +6,15 @@
 #include <stdbool.h>
 
 
+#define NULL_INT (int)0
+#define NULL_DOUBLE (double)0
+#define NULL_CHAR ' '
+#define NULL_MYSTRING empty_MyString()
+#define NULL_UNSIGNED_LONG (unsigned long) 0
+#define NULL_FLOAT (float)0f
+#define NULL_BOOL (bool)0
+
+
 typedef union {
     MyString MyString_val;
     int int_val;
