@@ -124,4 +124,18 @@ inline MyString *get_slice_MyString(MyString *str, size_t start, size_t end) {
 }
 
 
+inline ArrayofMyString *join_MyString(MyString *str, const char sep) {
+    if (str == NULL) return NULL;
+    ArrayofMyString *out = (ArrayofMyString*)malloc(sizeof(ArrayofMyString));
+    if (out == NULL) return NULL;
+    out->length = strlen(str);
+    out->data = (MyString*)malloc(sizeof(MyString) * out->length);
+    if (out->data == NULL) {
+        free(out);
+        return NULL;
+    }
+    return out;
+}
+
+
 #endif

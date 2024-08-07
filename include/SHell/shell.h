@@ -24,6 +24,19 @@ const char *SHELL_WORDS[] = {
 const char *PREFIX = "MDBMS > ";
 
 
+inline int run_shell() {
+
+    IOBuf *buf = new_IOBuf(1024);
+
+    if (buf == NULL) return 1;
+
+    while(true) {
+        fgets(buf->data, sizeof(char) * buf->length, stdin);
+
+    }
+
+    return 0;
+}
 
 
 #endif
