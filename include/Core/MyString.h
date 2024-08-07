@@ -14,6 +14,13 @@ typedef struct {
 } MyString;
 
 
+typedef struct {
+    MyString *data;
+    size_t length;
+    size_t top;
+} ArrayofMyString;
+
+
 inline size_t get_size_MyString(MyString *str) {
     if (str != NULL) 
         return (size_t)( sizeof(MyString) + ( sizeof(char) * str->length ) );
@@ -93,6 +100,27 @@ inline int read_MyString(FILE *file, MyString *str) {
         else return 1;
     }
     else return 1;
+}
+
+
+inline MyString *get_slice_MyString(MyString *str, size_t start, size_t end) {
+    if (str == NULL) return NULL;
+    else if (str->data == NULL) return NULL;
+    else if (start < str->length &&
+            start >= 0 &&
+            end >= 0 &&
+            end <= str->length) return NULL;
+    MyString *out = (MyString*)malloc(sizeof(MyString));
+    if (out == NULL) return NULL;
+    out->length = ( end - start ) + 1;
+    out->data = (char*)malloc(sizeof(char) * out->length );
+    if (out->data == NULL) {
+        free(out);
+        return NULL;
+    }
+    int counter = 0;
+    out->data = (char*)memcpy(out->data, str->data, out->length);
+    return out;
 }
 
 

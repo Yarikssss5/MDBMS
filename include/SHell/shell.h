@@ -4,7 +4,7 @@
 
 #include "IOBuf.h"
 
-inline const char *MDBMS_SQL_WORDS[] = {
+const char *MDBMS_SQL_WORDS[] = {
     "CREATE",
     "DROP",
     "RENAME",
@@ -15,13 +15,13 @@ inline const char *MDBMS_SQL_WORDS[] = {
 };
 
 
-inline const char *SHELL_WORDS[] = {
+const char *SHELL_WORDS[] = {
     ".exit",
     ".open",
 };
 
 
-inline const char *PREFIX = "MDBMS > ";
+const char *PREFIX = "MDBMS > ";
 
 
 
