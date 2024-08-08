@@ -1,10 +1,10 @@
 #ifndef SHELL_I
 #define SHELL_I
 
-
+#include "../Core/Table.h"
 #include "IOBuf.h"
 
-const char *MDBMS_SQL_WORDS[] = {
+static const char *MDBMS_SQL_WORDS[] = {
     "CREATE",
     "DROP",
     "RENAME",
@@ -15,13 +15,14 @@ const char *MDBMS_SQL_WORDS[] = {
 };
 
 
-const char *SHELL_WORDS[] = {
+static const char *SHELL_WORDS[] = {
     ".exit",
     ".open",
+    ".types",
 };
 
 
-const char *PREFIX = "MDBMS > ";
+static const char *PREFIX = "MDBMS > ";
 
 
 inline int run_shell() {
@@ -29,12 +30,11 @@ inline int run_shell() {
     IOBuf *buf = new_IOBuf(1024);
 
     if (buf == NULL) return 1;
-
+    /*
     while(true) {
-        fgets(buf->data, sizeof(char) * buf->length, stdin);
-
+        printf("%s", PREFIX);
     }
-
+    */
     return 0;
 }
 

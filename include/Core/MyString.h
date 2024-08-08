@@ -21,6 +21,15 @@ typedef struct {
 } ArrayofMyString;
 
 
+inline void print_MyString(MyString *str) {
+    if (str != NULL) {
+        if (str->data != NULL) {
+            printf("%s \n", str->data);
+        }
+    }
+}
+
+
 inline size_t get_size_MyString(MyString *str) {
     if (str != NULL) 
         return (size_t)( sizeof(MyString) + ( sizeof(char) * str->length ) );
