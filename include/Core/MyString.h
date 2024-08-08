@@ -126,13 +126,23 @@ inline MyString *get_slice_MyString(MyString *str, size_t start, size_t end) {
 
 inline ArrayofMyString *join_MyString(MyString *str, const char sep) {
     if (str == NULL) return NULL;
+    if (str->data == NULL) return NULL;
     ArrayofMyString *out = (ArrayofMyString*)malloc(sizeof(ArrayofMyString));
     if (out == NULL) return NULL;
-    out->length = strlen(str);
+    out->length = strlen(str->data);
     out->data = (MyString*)malloc(sizeof(MyString) * out->length);
     if (out->data == NULL) {
         free(out);
         return NULL;
+    }
+    char *buf = (char*)"";
+    int str_counter = 0;
+    while (buf != NULL) {
+        buf = strtok(str->data, &sep);
+        out->data[str_counter].top = strlen(buf);
+        out->data[str_counter].length = strlen(buf);
+        out->data[str_counter].data = (char*)memcpy(buf, out->data[str_counter].data, (sizeof(char) * strlen(buf)));
+        str_counter += 1;
     }
     return out;
 }
